@@ -455,3 +455,108 @@ nav ul.menu li {
 nav ul.menu li:hover{
     display: block;
 } */
+
+/* #chat-launcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+#chat-launcher-button {
+    background-color: #1bd3e0;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+#chat-launcher-button svg {
+    width: 30px;
+    height: 30px;
+}
+#chat-launcher-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    background-color: #188ae7;
+} */
+
+/* .chat-widget-hidden {
+    display: none;
+} */
+
+/* .chat-widget {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+} */
+/* .show {
+    display: block !important;
+} */
+
+#social-launcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.social-button {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social-button img {
+    width: 30px;
+    height: 30px;
+}
+
+.social-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#report{
+    background-color: #3b5998;
+}
+
+#chat {
+    background-color: #3b5998;
+}
+
+.social-text {
+    position: absolute;
+    left: -180px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.3s, transform 0.3s;
+}
+

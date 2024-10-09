@@ -30,3 +30,17 @@ function display(productList) {
         productGrid.appendChild(productCard);
     });
 }
+
+// social launcher
+document.getElementById('chat').addEventListener('click', function() {
+    const report = document.getElementById('report');
+    // const whatsapp = document.getElementById('whatsapp');
+
+    if (report.style.display === 'none') {
+        report.style.display = 'flex'; // show
+        // whatsapp.style.display = 'flex';
+    } else {
+        report.style.display = 'none'; // hide
+        // whatsapp.style.display = 'none';
+    }
+});

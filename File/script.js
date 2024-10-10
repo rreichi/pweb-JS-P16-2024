@@ -2,6 +2,21 @@ const API_URL = 'https://dummyjson.com/products';
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+//filter element
+const categoryFilter = document.getElementById('category-filter');
+
+//event listener for filter
+categoryFilter.addEventListener('change', function() {
+    const selectedCategory = this.value;
+    if (selectedCategory === 'all') {
+        display(products); //menampilkan semua produk jika 'All Categorires'
+    }
+    else {
+        const filteredProducts = products.filter(product => product.category === selectedCategory);
+        display(filteredProducts); //menampilkan produk sesuai dengan kategori
+    }
+});
+
 fetch(API_URL)
     .then(response => response.json())
     .then(data => {

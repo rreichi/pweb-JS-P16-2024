@@ -1,6 +1,9 @@
 const API_URL = 'https://dummyjson.com/products';
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let filteredProducts = []; //produk yang sudah difilter berdasarkan kategori
+let currentPage = 1; //page saat ini
+let itemsPerPage = 4; //default jumlah item per page
 
 //filter element
 const categoryFilter = document.getElementById('category-filter');
@@ -16,6 +19,18 @@ categoryFilter.addEventListener('change', function() {
         display(filteredProducts); //menampilkan produk sesuai dengan kategori
     }
 });
+
+function filterByCategory(category) {
+    filteredProducts = products.filter(product => product.category === category);
+    currentPage = 1; //reset ke page pertama setelah difilter
+    display(filterByCategory);
+}
+
+function changeItemsPerPage() {
+    itemsPerPage = parseInt(document.getElementById('itemsPerPage').value);
+    currentPage = 1; //kembali ke page 1 saat user mengubah item per page
+    display(filteredProducts.length > 0 ? filteredProducts : products); //tampilkan produk yg difilter atau semua produk
+}
 
 fetch(API_URL)
     .then(response => response.json())
@@ -33,7 +48,14 @@ function display(productList) {
     const productGrid = document.getElementById('product-grid');
     productGrid.innerHTML = '';
 
-    productList.forEach(product => {
+    //jika filteredProducts ada, gunakan itu; jika tidak, gunakan semua produk
+    const activeProducts = filteredProducts.length > 0 ? filteredProducts : productList;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const productsToDisplay = productList.slice(startIndex, endIndex);
+
+    productsToDisplay.forEach(product => {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
         productCard.innerHTML = `
@@ -44,7 +66,34 @@ function display(productList) {
         `;
         productGrid.appendChild(productCard);
     });
+
+    displayPagination(activeProducts.length); //updata pagination nya berdasarkan produk yg difilter
 }
+
+function displayPagination(totalItems) {
+    const paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';
+
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.classList.add('pagination-button');
+
+        if (i === currentPage) {
+            pageButton.classList.add('active');
+        }
+        pageButton.onclick = () => {
+            currentPage = i;
+            display(filteredProducts.length > 0 ? filteredProducts : products); //tampilkan produk yg difilter atau semua produk
+        };
+        paginationContainer.appendChild(pageButton);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    display(products);
+});
 
 // social launcher
 document.getElementById('chat').addEventListener('click', function() {
@@ -59,3 +108,92 @@ document.getElementById('chat').addEventListener('click', function() {
         // whatsapp.style.display = 'none';
     }
 });
+
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const itemInCart = cart.find(item => item.id === productId);
+
+    if (itemInCart) {
+        itemInCart.quantity += 1; //jika item udah ada di cart, tambahkan jumlahnya
+    }
+
+    else {
+        cart.push({
+            ...product,
+            quantity: 1 //jika belum ada, tambahkan item ke cart dengan jumlah 1
+        });
+    }
+    updateCart();
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId); //hapus item dari cart
+    updateCart();
+}
+
+function changeQuantity(productId, action) {
+    const itemInCart = cart.find(item => item.id === productId);
+
+    if (itemInCart) {
+        if (action ==='increase') {
+            itemInCart.quantity += 1;
+        }
+
+        else if (action === 'decrease' && itemInCart.quantity > 1) {
+            itemInCart.quantity -= 1;
+        }
+    }
+    updateCart();
+}
+
+function updateCart() {
+    localStorage.setItem('cart', JSON.stringify(cart)); //simpan cart di localstorage
+    displayCart(); //tampilkan cart
+    calculateTotal(); //hitung total produk dan harga
+}
+
+function displayCart() {
+    const cartContainer = document.getElementById('cart-container');
+    cartContainer.innerHTML = '';
+
+    cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <img src="${item.thumbnail}" alt="${item.title}">
+            <h3>${item.title}</h3>
+            <p>Price: $${item.price}</p>
+            <p>Quantity: ${item.quantity}</p>
+            <button onclick="changeQuantity(${item.id}, 'decrease')">-</button>
+            <button onclick="changeQuantity(${item.id}, 'increase')">+</button>
+            <button onclick="removeFromCart(${item.id})">Remove</button>
+        `;
+        cartContainer.appendChild(cartItem);
+    });
+}
+
+//inisialisasi cart pas halaman dimuat/load
+document.addEventListener('DOMContentLoaded', () => {
+    displayCart();
+});
+
+function calculateTotal() {
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    //tampilkan total item dan harga di checkout area
+    document.getElementById('total-items').textContent = `Total Items: ${totalItems}`;
+    document.getElementById('total-price').textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+    }
+    //proses checkout
+    alert(`You have succesfully checked out! Total: $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}`);
+
+    //kosongkan cart setelah checkout
+    cart = [];
+    updateCart();
+}

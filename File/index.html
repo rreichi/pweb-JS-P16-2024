@@ -44,6 +44,12 @@
 
         <section id="products">
             <h2>Our Sneaker Collection</h2>
+            <div id="cart-container"></div>
+            <div id="checkout-summary">
+                <p id="total-items">Total Items: 0</p>
+                <p id="total-price">Total Price: $0.00</p>
+                <button onclick="checkout()">Proceed to Checkout</button>
+            </div>
             <select id="category-filter">
                 <option value="all">All Categories</option>
                 <option value="beauty">Beauty</option>
@@ -51,7 +57,15 @@
                 <option value="furniture">Furniture</option>
                 <option value="groceries">Groceries</option>
             </select>
+            <label for ="itemsPerPage">Items per page:</label>
+            <select id="itemsPerPage" onchange="changeItemsPerPage()">
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="12">12</option>
+            </select>
+            <div id="pagination"></div>
             <div class="product-grid" id="product-grid">
+
                 <!-- <div class="product-card">
                     <img src="Assets/Classic_White.jpg" alt="Classic White Sneaker">
                     <h3>Classic White</h3>
@@ -78,6 +92,7 @@
                 </div> -->
             </div>
         </section>
+        <div id="cart-container"></div>
     </main>
 
     <footer>

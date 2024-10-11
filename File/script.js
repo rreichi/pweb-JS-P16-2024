@@ -20,10 +20,32 @@ categoryFilter.addEventListener('change', function() {
     }
 });
 
-function filterByCategory(category) {
-    filteredProducts = products.filter(product => product.category === category);
-    currentPage = 1; //reset ke page pertama setelah difilter
-    display(filterByCategory);
+sortFilter.addEventListener('change', function() {
+    sortProducts();
+});
+
+function sortProducts() {
+    const sortOption = sortFilter.value;
+    let sortedProducts = [...products];
+
+    switch (sortOption) {
+        case 'price-asc':
+            sortedProducts.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-desc':
+            sortedProducts.sort((a, b) => b.price - a.price);
+            break;
+        case 'rating-asc':
+            sortedProducts.sort((a, b) => a.rating - b.rating);
+            break;
+        case 'rating-desc':
+            sortedProducts.sort((a, b) => b.rating - a.rating);
+            break;
+        default:
+            sortedProducts = products;
+    }
+
+    display(sortedProducts);
 }
 
 function changeItemsPerPage() {

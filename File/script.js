@@ -7,6 +7,7 @@ let itemsPerPage = 4; //default jumlah item per page
 
 //filter element
 const categoryFilter = document.getElementById('category-filter');
+const sortFilter = document.getElementById('sort');
 
 //event listener for filter
 categoryFilter.addEventListener('change', function() {

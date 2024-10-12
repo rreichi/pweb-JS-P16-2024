@@ -173,6 +173,106 @@ h1, h2, h3 {
     color: var(--color-5);
 }
 
+div#cart-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+div#checkout-summary {
+    margin-block-start: 1rem;
+    color: var(--color-1);
+}
+
+label {
+    color: var(--color-1);
+}
+
+#checkout-summary button {
+    background-color: var(--color-3);
+    color: var(--color-5);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+select#category-filter {
+    background-color: var(--color-3);
+    color: var(--color-5);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+select#itemsPerPage {
+    background-color: var(--color-3);
+    color: var(--color-5);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+div#pagination {
+    margin-block-end: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+button.pagination-button.active, button.pagination-button {
+    background-color: var(--color-3);
+    color: var(--color-5);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item {
+    background-color: var(--color-5);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s ease;
+    color: black;
+}
+
+.cart-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.cart-item h3 {
+    color: var(--color-2);
+}
+
+.cart-item p {
+    color: var(--color-3);
+    margin-bottom: 1rem;
+}
+
+.cart-item button {
+    background-color: var(--color-3);
+    color: var(--color-5);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

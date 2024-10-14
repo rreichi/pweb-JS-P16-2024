@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials</title>
+    <link rel="stylesheet" href="style.css">
+        <style>
+            table th {
+                background-color: #034078;
+                color: white;
+            }
+            table tr:nth-child(even) {
+                background-color: #f2f2f2;
+                color: black;
+            }
+            table tr:nth-child(odd) {
+                background-color: #ffffff;
+                color: black;
+            }
+            table tr:hover {
+                background-color: #ddd;
+            }        
+            table, th, td {
+                border: 1px solid #ddd;
+            }
+        </style>
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+        <div class="logo">
+            <a href="index.html">SnapKick.</a>
+        </div>
+    </header>
+    <main style="padding: 20px;">
+        <section id="testimonial-list">
+            <h2>Kritik dan Saran</h2>
+            <table id="testimonial-table" border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; text-align: center;">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="testimonials"></tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SnapKicks</h3>
+                <p>Your local source for premium sneakers.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="contact.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@snapkicks.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 SnapKicks. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const testimonials = JSON.parse(localStorage.getItem('testimonials')) || [];
+    
+        const testimonialsTable = document.getElementById('testimonials');
+    
+        if (testimonials.length === 0) {
+            const noDataRow = document.createElement('tr');
+            noDataRow.innerHTML = '<td colspan="4" style="text-align:center;">Belum ada testimoni yang dikirimkan. Jadilah yang pertama!</td>';
+            testimonialsTable.appendChild(noDataRow);
+        } else {
+            testimonials.forEach((testimonial, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${testimonial.name}</td>
+                    <td>${testimonial.email}</td>
+                    <td>${testimonial.message}</td>
+                `;
+                testimonialsTable.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>

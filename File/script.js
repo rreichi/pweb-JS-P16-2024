@@ -220,3 +220,40 @@ function checkout() {
     cart = [];
     updateCart();
 }
+
+// modal
+const contactModal = document.getElementById('contactModal');
+const closeModalBtn = document.querySelector('.close');
+const chatLauncher = document.getElementById('chat');
+
+chatLauncher.addEventListener('click', () => {
+    contactModal.style.display = 'block';
+});
+
+closeModalBtn.addEventListener('click', () => {
+    contactModal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === contactModal) {
+        contactModal.style.display = 'none';
+    }
+});
+
+// testi
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    let testimonials = JSON.parse(localStorage.getItem('testimonials')) || [];
+
+    testimonials.push({ name, email, message }); // add
+    localStorage.setItem('testimonials', JSON.stringify(testimonials)); // save
+
+    alert('Terima kasih atas masukannya!');
+    contactModal.style.display = 'none';
+    this.reset();
+});

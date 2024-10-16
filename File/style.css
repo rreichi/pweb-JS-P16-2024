@@ -196,6 +196,8 @@ label {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 select#category-filter {
@@ -209,6 +211,21 @@ select#category-filter {
 }
 
 select#itemsPerPage {
+    background-color: var(--color-3);
+    color: var(--color-5);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-options {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+select#sort {
     background-color: var(--color-3);
     color: var(--color-5);
     border: none;
@@ -233,6 +250,7 @@ button.pagination-button.active, button.pagination-button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 0.1rem;
 }
 
 .cart-item {
@@ -260,7 +278,7 @@ button.pagination-button.active, button.pagination-button {
 
 .cart-item p {
     color: var(--color-3);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .cart-item button {
@@ -271,6 +289,7 @@ button.pagination-button.active, button.pagination-button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 0.5rem;
 }
 
 .product-grid {
